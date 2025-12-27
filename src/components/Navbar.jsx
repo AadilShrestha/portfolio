@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaGithub, FaLinkedin } from "react-icons/fa";
 import useScrollDirection from "../hooks/useScrollDirection";
 
 const Navbar = () => {
@@ -8,8 +8,7 @@ const Navbar = () => {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" }
+    { name: "Skills", href: "#skills" }
   ];
   
   const [isOpen, setIsOpen] = useState(false);
@@ -46,20 +45,6 @@ const Navbar = () => {
         boxShadow: scrolled ? "0 10px 40px rgba(0, 0, 0, 0.3)" : "none"
       }}
     >
-      <motion.div 
-        className="logo relative group"
-        whileHover={{ scale: 1.05 }}
-      >
-        <h1 className="font-regular text-2xl sm:text-3xl bg-gradient-to-r from-white to-orange bg-clip-text hover:text-transparent transition-all duration-300">
-          <a href="#home" className="relative">
-            Aadil Shrestha
-            <motion.span 
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange to-yellow-300 group-hover:w-full transition-all duration-300"
-            />
-          </a>
-        </h1>
-      </motion.div>
-
       <div className="hidden sm:flex gap-8 items-center">
         {links.map((link, index) => (
           <motion.a
@@ -78,6 +63,29 @@ const Navbar = () => {
             />
           </motion.a>
         ))}
+      </div>
+
+      <div className="hidden sm:flex gap-6 items-center">
+        <motion.a
+          href="https://github.com/Aadil-Shrestha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-2xl text-gray-400 hover:text-orange transition-colors duration-300"
+          whileHover={{ scale: 1.2, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaGithub />
+        </motion.a>
+        <motion.a
+          href="https://linkedin.com/in/aadil-shrestha"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-2xl text-gray-400 hover:text-orange transition-colors duration-300"
+          whileHover={{ scale: 1.2, rotate: -5 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <FaLinkedin />
+        </motion.a>
       </div>
 
       <div className="sm:hidden flex">

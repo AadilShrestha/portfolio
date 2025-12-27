@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import image from "../assests/img/landing.png";
 import MagneticButton from "../components/animated/MagneticButton";
-import TextReveal from "../components/animated/TextReveal";
 import FadeInWhenVisible from "../components/animated/FadeInWhenVisible";
 
 const Hero = () => {
-  const [text, setText] = useState("");
-  const fullText = "Aadil Shrestha";
-  const [isTyping, setIsTyping] = useState(true);
   const shouldReduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
-
-  useEffect(() => {
-    if (isTyping && text.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setText(fullText.slice(0, text.length + 1));
-      }, 100);
-      return () => clearTimeout(timeout);
-    } else if (text.length === fullText.length) {
-      setIsTyping(false);
-    }
-  }, [text, isTyping]);
 
   return (
     <div className="min-h-screen pt-24 md:pt-10 self-center grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
@@ -84,48 +69,33 @@ const Hero = () => {
           </h1>
         </FadeInWhenVisible>
         
-        <div className="title text-5xl md:text-8xl min-h-[1.2em]">
-          <span className="text-orange drop-shadow-[0_0_30px_rgba(211,233,122,0.5)] font-bold">{text}</span>
-          {!shouldReduceMotion && (
-            <motion.span
-              className="inline-block w-1 h-[0.8em] bg-orange ml-1 shadow-[0_0_20px_rgba(211,233,122,0.8)]"
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-            />
-          )}
-        </div>
+        <FadeInWhenVisible direction="right" delay={0.3}>
+          <h1 className="title text-5xl md:text-8xl text-orange drop-shadow-[0_0_30px_rgba(211,233,122,0.5)] font-bold">
+            Aadil Shrestha
+          </h1>
+        </FadeInWhenVisible>
+
+        <FadeInWhenVisible direction="down" delay={0.4}>
+          <div className="mt-6 space-y-2">
+            <p className="text-2xl md:text-3xl font-semibold text-white">
+              Fullstack Developer
+            </p>
+            <p className="text-lg text-gray-300">
+              Based in Nepal
+            </p>
+            <p className="text-base text-gray-400">
+              React & Nest.js
+            </p>
+          </div>
+        </FadeInWhenVisible>
 
         <FadeInWhenVisible direction="down" delay={0.6}>
-          <p className="text-l mt-4 max-w-lg">
-            A Nepal based Web developer passionate about building accessible and
-            user friendly websites.
+          <p className="text-l mt-6 max-w-lg">
+            Passionate about building accessible and user-friendly web applications.
           </p>
         </FadeInWhenVisible>
 
-        <FadeInWhenVisible direction="up" delay={0.8}>
-          <div className="mt-8 links">
-            <MagneticButton
-              className="bg-gradient-to-r from-orange via-orange to-orange bg-[length:200%_auto] text-black flex gap-6 items-center p-3 px-7 rounded-2xl hover:bg-gradient-to-r hover:from-orange hover:via-yellow-300 hover:to-orange hover:shadow-[0_0_40px_rgba(211,233,122,0.6)] font-bold transition-all duration-300 shadow-[0_8px_30px_rgba(211,233,122,0.3)] hover:shadow-[0_8px_50px_rgba(211,233,122,0.5)] hover:scale-105"
-              magneticStrength={0.2}
-            >
-              Contact Me
-              {!shouldReduceMotion && (
-                <motion.span 
-                  className="h-2 w-2 bg-black rounded-full shadow-[0_0_10px_rgba(0,0,0,0.5)]"
-                  animate={{ 
-                    scale: [1, 1.3, 1],
-                    opacity: [1, 0.7, 1]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-              )}
-            </MagneticButton>
-          </div>
-        </FadeInWhenVisible>
+
       </motion.div>
 
       <motion.div 
