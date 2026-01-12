@@ -11,6 +11,17 @@ const Projects = () => {
   const INITIAL_DISPLAY = 4;
 
   const projects = [
+      {
+      id: 7,
+      title: "Bus Booking System",
+      description: "Online bus ticket booking platform with interactive seat selection, trip management, real-time availability updates, and booking form validation. Integrated payment gateway and MongoDB for data persistence.",
+      year: "2024",
+      role: "Fullstack Developer",
+      image: img,
+      liveUrl: "#",
+      githubUrl: "#",
+      tags: ["React", "TypeScript", "NestJS", "MongoDB"]
+    },
     {
       id: 1,
       title: "Clean for Cash",
@@ -67,17 +78,7 @@ const Projects = () => {
       githubUrl: "#",
       tags: ["React 19", "TypeScript", "Vite 7", "Tailwind CSS 4"]
     },
-    {
-      id: 7,
-      title: "Bus Booking System",
-      description: "Online bus ticket booking platform with interactive seat selection, trip management, real-time availability updates, and booking form validation. Integrated payment gateway and MongoDB for data persistence.",
-      year: "2024",
-      role: "Fullstack Developer",
-      image: img,
-      liveUrl: "#",
-      githubUrl: "#",
-      tags: ["React", "TypeScript", "NestJS", "MongoDB"]
-    }
+ 
   ];
 
   const [filter, setFilter] = useState("all");
