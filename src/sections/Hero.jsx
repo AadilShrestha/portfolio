@@ -10,7 +10,7 @@ const Hero = () => {
   const y = useTransform(scrollY, [0, 500], [0, 150]);
 
   return (
-    <div className="min-h-screen pt-24 md:pt-10 self-center grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
+    <div className="min-h-screen pt-24 md:pt-10 self-center grid grid-cols-1 md:grid-cols-1 relative overflow-hidden">
       {!shouldReduceMotion && (
         <>
           <motion.div 
@@ -98,7 +98,7 @@ const Hero = () => {
 
       </motion.div>
 
-      <motion.div 
+      {/* <motion.div 
         className="mt-4 md:m-0 pfp grid relative z-10"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -161,7 +161,7 @@ const Hero = () => {
             />
           </>
         )}
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 };
