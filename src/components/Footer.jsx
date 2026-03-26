@@ -1,87 +1,86 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { contact, profile } from "../data/portfolioContent";
+
+const isExternalLink = (href = "") => /^https?:\/\//i.test(href);
 
 const Footer = () => {
-  const socialLinks = [
-    {
-      name: "GitHub",
-      icon: FaGithub,
-      href: "https://github.com/Aadil-Shrestha",
-      color: "hover:text-purple-400"
-    },
-    {
-      name: "LinkedIn",
-      icon: FaLinkedin,
-      href: "https://linkedin.com/in/aadil-shrestha",
-      color: "hover:text-blue-400"
-    },
-    {
-      name: "Email",
-      icon: FaEnvelope,
-      href: "mailto:aadilshrestha4@gmail.com",
-      color: "hover:text-orange"
-    }
-  ];
-
-  const SocialLinks = () => (
-    <motion.div 
-      className="flex gap-8"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      {socialLinks.map((link, index) => {
-        const Icon = link.icon;
-        return (
-          <motion.a
-            key={link.name}
-            href={link.href}
-            target={link.name !== "Email" ? "_blank" : undefined}
-            rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
-            className={`text-3xl text-gray-400 ${link.color} transition-colors duration-300`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            viewport={{ once: true }}
-            whileHover={{ 
-              scale: 1.2, 
-              rotate: [0, -10, 10, 0],
-              transition: { duration: 0.3 }
-            }}
-            whileTap={{ scale: 0.9 }}
-            aria-label={link.name}
-          >
-            <Icon />
-          </motion.a>
-        );
-      })}
-    </motion.div>
-  );
-
-  const Copyright = () => (
-    <motion.div 
-      className="text-center space-y-2"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.4, duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <p className="text-gray-400 font-medium">
-        © 2025 Aadil Shrestha
-      </p>
-      <p className="text-gray-500 text-sm">
-        Built with React & Tailwind
-      </p>
-    </motion.div>
-  );
+  const emailHref = contact?.email ? `mailto:${contact.email}` : "#contact";
+  const quickLinks = contact?.links ?? [];
+  const socialLinks = profile?.socialLinks ?? [];
 
   return (
-    <footer className="py-12 border-t-2 border-grey/30 mt-20">
-      <div className="flex flex-col items-center gap-6">
-        <SocialLinks />
-        <Copyright />
+    <footer className="mt-20 rounded-3xl border border-white/10 bg-zinc-900/60 px-6 py-10 sm:px-8 lg:px-10">
+      <div className="grid gap-10 lg:grid-cols-[1.45fr,1fr]">
+        <div>
+          <p className="eyebrow">Contact</p>
+          <h2 className="section-heading mt-3 text-3xl sm:text-4xl">{contact.heading}</h2>
+          <p className="section-intro mt-4">{contact.description}</p>
+
+          <a href={emailHref} className="primary-cta mt-6">
+            Email {profile.name}
+          </a>
+
+          <div className="mt-5 space-y-1 text-sm text-zinc-300">
+            <p>{contact.availability}</p>
+            <p className="text-zinc-400">{contact.responseTime}</p>
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400">
+              Quick links
+            </h3>
+            <ul className="mt-3 space-y-2">
+              {quickLinks.map((link) => {
+                const external = isExternalLink(link.href);
+
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      className="text-link"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400">
+              Social
+            </h3>
+            <ul className="mt-3 flex flex-wrap gap-3">
+              {socialLinks.map((link) => {
+                const external = isExternalLink(link.href);
+
+                return (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      className="rounded-full border border-white/15 px-3 py-1.5 text-sm font-medium text-zinc-200 hover:border-emerald-300/40 hover:text-emerald-200"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10 border-t border-white/10 pt-5 text-sm text-zinc-400">
+        <p>
+          © {new Date().getFullYear()} {profile.name}. Built for teams that need clear
+          ownership and measurable delivery.
+        </p>
       </div>
     </footer>
   );

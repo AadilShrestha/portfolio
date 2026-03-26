@@ -2,44 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Regular";
-  src: local("BebasNeue-Regular"),
-    url("./assests/fonts/BebasNeue-Regular.ttf") format(truetype);
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#0A0A0A] text-zinc-200 antialiased;
+    font-family: "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    @apply bg-emerald-300/40 text-zinc-950;
+  }
+
+  a {
+    @apply underline-offset-4 transition-colors duration-200;
+  }
+
+
+  *:focus-visible {
+    @apply rounded-sm outline-none ring-2 ring-emerald-300 ring-offset-2 ring-offset-[#0A0A0A];
+  }
 }
 
-@layer utilities {
-  .nav-links {
-    @apply relative;
+@layer components {
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400;
   }
 
-  .nav-links::after {
-    @apply content-[""] h-[2px] absolute w-0 -bottom-1 left-0  bg-slate-400;
+  .section-heading {
+    @apply text-3xl font-semibold tracking-tight text-zinc-50 sm:text-4xl lg:text-5xl;
   }
 
-  .nav-links:hover::after {
-    @apply w-full  transition-all duration-300;
+  .section-intro {
+    @apply max-w-3xl text-base text-zinc-300 sm:text-lg;
   }
 
-  .title {
-    @apply text-4xl sm:text-7xl text-white  font-regular;
+  .panel {
+    @apply rounded-2xl border border-white/10 bg-zinc-900/55 p-6 shadow-[0_8px_35px_rgba(0,0,0,0.25)];
   }
 
-  .underline-btn {
-    @apply text-orange pb-1 border-b-2 border-orange uppercase font-semibold hover:border-yellow-300 hover:text-yellow-300 transition-all duration-300;
+  .primary-cta {
+    @apply inline-flex items-center justify-center rounded-full border border-emerald-300/40 bg-emerald-300/15 px-5 py-2.5 text-sm font-semibold text-emerald-100 transition-colors hover:bg-emerald-300/25;
   }
 
-  @keyframes gradient {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  .animate-gradient {
-    background-size: 200% auto;
-    animation: gradient 3s ease infinite;
+  .text-link {
+    @apply inline-flex items-center gap-2 text-sm font-medium text-zinc-100 hover:text-emerald-200;
   }
 }

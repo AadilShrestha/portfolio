@@ -1,4 +1,3 @@
-import React from "react";
 import Hero from "../sections/Hero";
 import Projects from "../sections/Projects";
 import Skills from "../sections/Skills";
@@ -7,20 +6,26 @@ import Footer from "./Footer";
 
 const Pages = () => {
   return (
-    <div className="px-10 py-10 md:px-16 max-w-7xl mx-auto sm:px-24">
-      <section id="home">
+    <div className="mx-auto max-w-6xl px-6 pb-16 pt-28 sm:px-10 lg:px-16">
+      <section id="home" className="scroll-mt-28">
         <Hero />
       </section>
-      <section id="about">
-        <About />
-      </section>
-      <section id="projects">
+
+      <section id="case-studies" className="scroll-mt-28">
         <Projects />
       </section>
-      <section id="skills">
+
+      <section id="capabilities" className="scroll-mt-28">
         <Skills />
       </section>
-      <Footer />
+
+      <section id="process" className="scroll-mt-28">
+        <About />
+      </section>
+
+      <section id="contact" className="scroll-mt-28">
+        <Footer />
+      </section>
     </div>
   );
 };
